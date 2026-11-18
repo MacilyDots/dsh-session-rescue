@@ -1,0 +1,16 @@
+# dsh-session-rescue bundle patch: one entry assembling all five modules.
+#
+# 单入口聚合（lead 2026-11-18 指示）：五个模块都在 ./index.js 的 apply 里装配，
+# 模块开关是 config 字段，不是独立行：
+#   guardEnabled / retryEnabled / inheritEnabled / wiretapEnabled
+# 关掉某个模块就在 profile 的 cordis.patch.yml 覆盖 config，例如：
+#   - id: session-rescue
+#     config:
+#       wiretapEnabled: true      # wiretap 默认关闭，排查时才打开
+#       retryEnabled: false       # 其余模块默认全开
+#
+# fetch 顺序：wiretap 在 retry 之后 apply，故 wiretap 位于外层（它看到重试后的
+# 响应）；retry 保留自己的空轮证据目录，两者证据互不依赖。
+- insert:
+    - id: session-rescue
+      name: 'dsh-session-rescue'

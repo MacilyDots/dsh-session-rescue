@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Session rescue kit",
+    "description": "Detects reasoning repetition loops and reasoning-only empty turns, records diagnosis evidence, creates clean recovery sessions, and offers a renderer refresh shortcut (Ctrl+Shift+R)."
+  }
+}
