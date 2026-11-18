@@ -13,13 +13,14 @@ const env = { ...process.env, DSH_HOME: home }
 // node:test 文件（并行跑；integration 自带独立 HOME 前缀，互不冲突）
 const testFiles = [
   'integration.test.mjs',
-  'branches.test.mjs', 'contract.test.mjs', 'extract.test.mjs',
+  'branches.test.mjs', 'client.test.mjs', 'contract.test.mjs', 'extract.test.mjs',
   'host.test.mjs', 'inherit-service.test.mjs',
 ]
 // 传统 assert 脚本（单文件串行）
 const scripts = [
   'test-detect.mjs', 'test-request-tap.mjs', 'test-plugin.mjs', 'test-recovery.mjs',
   'test-sse.mjs', 'test-wiretap.mjs', 'test-request-object.mjs', 'test-retry.mjs',
+  'test-freeze.mjs',
 ]
 
 let failed = 0

@@ -194,7 +194,7 @@ test('Config schema 保留旧字段 + volatile 新字段', () => {
 })
 
 // ── 断言 6：fetch 层级——wiretap 在 retry 外层 ────────────────────────────
-test('wiretap 默认不装配；开启时位于 retry 外层，分别记录每次上游请求', async () => {
+test('wiretap 默认不装配；开启时位于 retry 外层，retry 可重发请求', async () => {
   const THINKING_ONLY = [
     { type: 'message_start', message: { id: 'm1', model: 'd', content: [] } },
     { type: 'content_block_start', index: 0, content_block: { type: 'thinking', thinking: '' } },
@@ -256,13 +256,13 @@ test('wiretap 默认不装配；开启时位于 retry 外层，分别记录每�
     }))
     const text = await response.text()
     assert.ok(text.includes('正文。'))
-    // 外层 wiretap 应看到 retry 发出的第二次请求：基线 fetch 被调两次。
+    // retry 内部绕过外层 wiretap 发起重试；底层 fetch 应被调两次。
     let waited = 0
     while (baseFetch.callCount() < 2 && waited < 100) {
       await new Promise(r => setTimeout(r, 10))
       waited += 1
     }
-    assert.equal(baseFetch.callCount(), 2, '基线 fetch 应被调 2 次（wiretap 外层看到重发）')
+    assert.equal(baseFetch.callCount(), 2, 'retry 应让基线 fetch 被调两次')
 
     // 卸载（effect 逆序）：wiretap 先卸，retry 后卸，最终恢复基线。
     for (const e of [...m.effects].reverse()) { try { e.dispose?.() } catch { /* ignore */ } }
