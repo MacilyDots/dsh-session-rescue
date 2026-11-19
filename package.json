@@ -1,6 +1,6 @@
 {
   "name": "dsh-session-rescue",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "type": "module",
   "description": "DeepSeek Harness session reliability kit: degeneration guard, reasoning-only retry, optional wiretap, inherited recovery sessions, and renderer refresh shortcut.",
   "dependencies": {
