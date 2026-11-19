@@ -69,7 +69,7 @@ The kit does not upload these files.
 
 ## Verification status
 
-Module test suites pass locally, including service call order, depth registration before prompt, timeout handling, and degraded fallback paths. The full host-side recovery chain has not been observed on a real fused trip. The reload shortcut is present in the client bundle; its effectiveness against the blank-body symptom is a mechanism-based inference because no before/after comparison was captured.
+Module test suites pass locally, including service call order, depth registration before prompt, timeout handling, and degraded fallback paths. The full host-side recovery chain has not been observed on a real fused trip. The `Ctrl+Shift+R` reload shortcut has been manually verified to restore hidden assistant replies.
 
 ## Feedback
 
